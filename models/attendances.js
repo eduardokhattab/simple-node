@@ -1,14 +1,14 @@
 const connection = require('../infra/db/connection');
 
 class Attendance {
-  add(attendance) {
+  add(attendance, res) {
     const sql = 'INSERT INTO attendances SET ?'
 
     connection.query(sql, attendance, (error, results) => {
       if (error) {
-        console.log(error);
+        res.send(400).json(error)
       } else {
-        console.log(results);
+        res.status(201).json(results)
       }
     })
   }
